@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 
-const context = new AudioContext()
-
-const bpm = 218
-
-const addBeat = time => {
-  const o = context.createOscillator()
-  o.type = "sine"
-  o.connect(context.destination)
-  o.start(time)
-  o.stop(time + 0.1)
-}
+import { playBeats } from './game/beats'
 
 class App extends Component {
   componentDidMount () {
-    const initialTime = context.currentTime
-    const times = Array.from({ length: 10 })
-      .map((el, i) => initialTime + i * (60/bpm))
-    times.forEach(addBeat)
-
+    playBeats({ amount: 8, bpm: 128 })
   }
   render() {
     return (
